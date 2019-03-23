@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @test.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @test.description %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @test.level %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @test.points %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @test.user %>
+</p>
+
+<%= link_to 'Edit', edit_test_path(@test) %> |
+<%= link_to 'Back', tests_path %>
