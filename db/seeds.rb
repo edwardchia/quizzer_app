@@ -51,14 +51,16 @@ users = User.all
 
   # load up 5 questions
   5.times do
-    q = Question.create(description: Faker::Quote, test_id: p.id, solution_id: 1)
+    question = Faker::Quote.yoda
+
+    q = Question.create(description: question, test_id: Test.last.id, solution_id: 1)
 
     # load up 4 answers
     4.times do
-      Answer.create(content: "This", question_id: q.id)
-      Answer.create(content: "That", question_id: q.id)
-      Answer.create(content: "All of the above", question_id: q.id)
-      Answer.create(content: "None", question_id: q.id)
+      Answer.create(content: "This", question_id: Question.last.id)
+      Answer.create(content: "That", question_id: Question.last.id)
+      Answer.create(content: "All of the above", question_id: Question.last.id)
+      Answer.create(content: "None", question_id: Question.last.id)
     end
   end
 end

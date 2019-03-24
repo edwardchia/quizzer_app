@@ -1,14 +1,23 @@
 <div class="card-body">
   <h1>Quiz Name: <%= @test.name %></h1>
-  <% for i in 1..5 do %>
-    <div><strong> Question <%= i%> </strong></div>
+
+
+    <% question_count = 1%>
+    
     <form>
-      <input type="radio" name="gender" value="male" checked> Answer A<br>
-      <input type="radio" name="gender" value="female"> Answer B<br>
-      <input type="radio" name="gender" value="other"> Answer C  <br>
-      <input type="radio" name="gender" value="other"> Answer D  <br>
-    </form>
+
+  <% @questions.each do |question | %>
+    <div><strong> Question: <%= question.description%> </strong></div>
+
+      <input type="radio" name="Question <%= question_count %>" value="1" > <%= question.answers[0].content %><br>
+      <input type="radio" name="Question <%= question_count %>"  value="2">  <%= question.answers[1].content %><br>
+      <input type="radio" name="Question <%= question_count %>"  value="3">  <%= question.answers[2].content %><br>
+      <input type="radio" name="Question <%= question_count %>"  value="4">  <%= question.answers[3].content %><br>
     <br>
+    <% question_count += 1 %>
   <% end %>
   <input type="submit">
+
+      </form>
+
 </div>
