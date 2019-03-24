@@ -1,7 +1,8 @@
 class TestsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user!, except: [:index]
   before_action :set_test, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:destroy, :edit, :update]
+  before_action :authorize_teacher!, only: [:new, :create, :show]
 
   # GET /tests/new as new_test_path [tests#new]
   def new
@@ -73,7 +74,11 @@ class TestsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to root_path, alert: 'access denied' unless can? :crud, @test
+    redirect_to tests_path, alert: 'access denied' unless can? :crud, @test
+  end
+
+  def authorize_teacher!
+    redirect_to tests_path, alert: 'access denied' unless can? :create, current_user
   end
 
 end
