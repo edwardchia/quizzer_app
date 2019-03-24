@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :show, :create, :edit, :update]
   resource :session, only: [:new, :create, :destroy]
 
-  get("/start_test/:id", to: "completed_tests#show", as: :take_test)
+  get("/start_test/:id", to: "completed_tests#show")
+  post("/start_test/:id", to: "completed_tests#result")
 
   get("/", to: "welcome#home", as: :root)
 

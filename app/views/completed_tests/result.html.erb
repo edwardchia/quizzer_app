@@ -1,0 +1,48 @@
+<h1>Result Page</h1>
+
+<% correct_tally = 0%>
+
+<% question_count = 1%>
+
+  <% @questions.each do |question | %>
+    <% if @answers[question_count-1].to_i == question.solution_id.to_i  %>
+    <div class="correct">
+    <% else %>
+    <div class="wrong">
+    <% end %>
+
+    <div><strong> Question: <%= question_count %> : <%= question.description%> </strong></div>
+    Your answer: <%= Answer.where( "question_id=#{question.id}")[(question_count.to_i)].content %> (<%= @answers[question_count-1] %>)
+    <br>
+    Correct solution:  <%= Answer.where( "question_id=#{question.id}")[(question.solution_id.to_i) - 1].content %> (<%= question.solution_id %> )
+    <br>
+    
+  
+
+    <% if @answers[question_count-1].to_i == question.solution_id.to_i  %>
+    <strong> You got this question correct! </strong>
+    <% correct_tally += 1%>
+    <% else  %>
+     <strong> You got this question wrong! </strong>
+    <% end %>
+    <br>
+    <br>
+<% question_count += 1 %>
+</div>
+  <% end %>
+
+
+<h3>
+<p>You got <%= correct_tally %> out of <%= question_count -1 %> questions correct!</p>
+
+<% score = (correct_tally.to_f / question_count.to_f ) * 100 %>
+
+<p>Your score was: <%= score.to_i %> %</p>
+
+</h3>
+
+<%
+
+CompletedTest.create( user_id: current_user.id , score: score, test_id: @test.id )
+
+%>

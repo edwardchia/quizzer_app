@@ -53,7 +53,7 @@ users = User.all
   5.times do
     question = Faker::Quote.yoda
 
-    q = Question.create(description: question, test_id: Test.last.id, solution_id: 1)
+    q = Question.create(description: question, test_id: Test.last.id, solution_id: rand(1...4))
 
     # load up 4 answers
     4.times do
