@@ -22,8 +22,12 @@
   </div>
 
   <div class="field">
-    <%= form.label :level %>
-    <%= form.text_field :level %>
+    <%= form.label :beginner %>
+    <%= form.radio_button :level, "Beginner"%>
+    <%= form.label :intermediate %>
+    <%= form.radio_button :level, "Intermediate" %>
+    <%= form.label :advanced %>
+    <%= form.radio_button :level, "Advanced" %>
   </div>
 
   <div class="field">
@@ -32,6 +36,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Save"%>
   </div>
 <% end %>

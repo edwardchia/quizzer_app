@@ -20,10 +20,44 @@
   <%= @test.points %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @test.user %>
-</p>
-
 <%= link_to 'Edit', edit_test_path(@test) %> |
 <%= link_to 'Back', tests_path %>
+
+<section>
+  <h1>Questions</h1>
+
+  <%= form_with(model: [@test, @question], local: true) do |form| %>
+    <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :a %>
+    <%= form.text_field :a %>
+    <%= form.label :b %>
+    <%= form.text_field :b %>
+    <%= form.label :c %>
+    <%= form.text_field :c %>
+    <%= form.label :d %>
+    <%= form.text_field :d %>
+    <%= form.label :correct %>
+    <%= form.select :correct, [1, 2,3,4]%>  </div>
+
+  <div class="actions">
+    <%= form.submit "Save Question" %>
+  </div>
+  <% end %>
+  </section>

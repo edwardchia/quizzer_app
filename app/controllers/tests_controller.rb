@@ -1,32 +1,15 @@
 class TestsController < ApplicationController
   before_action :set_test, only: [:show, :edit, :update, :destroy]
 
-  # GET /tests
-  # GET /tests.json
-  def index
-    @tests = Test.all
-  end
-
-  # GET /tests/1
-  # GET /tests/1.json
-  def show
-  end
-
   # GET /tests/new
   def new
     @test = Test.new
-    # @test.user = current_user
-  end
-
-  # GET /tests/1/edit
-  def edit
   end
 
   # POST /tests
-  # POST /tests.json
   def create
     @test = Test.new(test_params)
-
+    @test.user = User.find(1)
     respond_to do |format|
       if @test.save
         format.html { redirect_to @test, notice: "Test was successfully created." }
@@ -38,8 +21,31 @@ class TestsController < ApplicationController
     end
   end
 
+  # GET /tests
+  def index
+    @tests = Test.all.order(created_at: :desc)
+  end
+
+  # GET /tests/1
+  def show
+    @question = Question.new
+    @questions = @test.questions.order(created_at: :desc)
+  end
+
+  # DELETE /tests/1
+  def destroy
+    @test.destroy
+    respond_to do |format|
+      format.html { redirect_to tests_url, notice: "Test was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  # GET /tests/1/edit
+  def edit
+  end
+
   # PATCH/PUT /tests/1
-  # PATCH/PUT /tests/1.json
   def update
     respond_to do |format|
       if @test.update(test_params)
@@ -52,16 +58,6 @@ class TestsController < ApplicationController
     end
   end
 
-  # DELETE /tests/1
-  # DELETE /tests/1.json
-  def destroy
-    @test.destroy
-    respond_to do |format|
-      format.html { redirect_to tests_url, notice: "Test was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -71,6 +67,6 @@ class TestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def test_params
-    params.require(:test).permit(:name, :description, :level, :points, :user_id)
+    params.require(:test).permit(:name, :description, :level, :points)
   end
 end
