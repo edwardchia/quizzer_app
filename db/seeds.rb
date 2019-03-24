@@ -12,15 +12,20 @@ User.destroy_all
 10.times do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
+
   User.create(
     email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
     password: "password",
+    first_name: first_name,
+    last_name: last_name,
   )
 end
 
 User.create(
   email: "js@winterfell.gov",
   password: "supersecret",
+  first_name: "John",
+  last_name: "Snow",
   is_admin: true,
   is_teacher: true,
 )
