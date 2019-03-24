@@ -1,13 +1,15 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question, only: [:edit, :update, :destroy]
-  # before_action :authorize_user!, only: [:destroy, :edit, :update]
-
+  before_action :authorize_user!, only: [:destroy, :edit, :update]
 
   # POST /questions
   def create
     # render json: question_params
     @test = Test.find params[:test_id]
+    if !(can? :crud, @test)
+      redirect_to test_path(@test), alert: 'access denied' and return
+    end
 
     @question = Question.new()
     @question.solution_id = question_params["correct"]
@@ -97,6 +99,7 @@ class QuestionsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to root_path, alert: 'access denied' unless can? :crud, @question
+    redirect_to test_path(@question.test), alert: 'access denied' unless can? :change, @question
   end
+
 end

@@ -18,10 +18,14 @@
   <strong>Points:</strong>
   <%= @test.points %>
 </p>
+<p>Created by: <%= @test.user&.full_name || 'DELETED' %></p>
 
-<%= link_to 'Edit Test', edit_test_path(@test) %>
+
+<% if can? :crud, @test %>
+<%= link_to 'Edit Test Profile', edit_test_path(@test) %>
 |
 <%= link_to 'Delete Test', test_path(@test), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
 
 <section>
   <h1>Questions</h1>

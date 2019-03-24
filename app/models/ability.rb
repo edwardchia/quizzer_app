@@ -30,14 +30,22 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     user ||= User.new
 
-    # if user.is_admin?
-    #   can :manage, :all
-    # end
+    if user.is_admin?
+      can :manage, :all
+    end
 
-    alias_action :create, :read, :update, :destroy, to: :crud
+    alias_action :edit, :update, :destroy, to: :crud
 
     can :crud, Test do |test|
-      test.user == user
+      test.user == user && user.is_teacher == true
+    end
+
+    can :create, User do |user|
+      user.is_teacher == true
+    end
+
+    can :change, Question do |question|
+      question.test.user == user
     end
 
   end
