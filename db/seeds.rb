@@ -8,6 +8,8 @@
 
 Test.destroy_all
 User.destroy_all
+Question.destroy_all
+Answer.destroy_all
 
 10.times do
   first_name = Faker::Name.first_name
@@ -46,4 +48,17 @@ users = User.all
     updated_at: created_at,
     user: users.sample,
   )
+
+  # load up 5 questions
+  5.times do
+    q = Question.create(description: Faker::Quote, test_id: p.id, solution_id: 1)
+
+    # load up 4 answers
+    4.times do
+      Answer.create(content: "This", question_id: q.id)
+      Answer.create(content: "That", question_id: q.id)
+      Answer.create(content: "All of the above", question_id: q.id)
+      Answer.create(content: "None", question_id: q.id)
+    end
+  end
 end
