@@ -1,0 +1,2 @@
+module CompletedTestsHelper
+end

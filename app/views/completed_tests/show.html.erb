@@ -1,0 +1,14 @@
+<div class="card-body">
+  <h1>Quiz Name: <%= @test.name %></h1>
+  <% for i in 1..5 do %>
+    <div><strong> Question <%= i%> </strong></div>
+    <form>
+      <input type="radio" name="gender" value="male" checked> Answer A<br>
+      <input type="radio" name="gender" value="female"> Answer B<br>
+      <input type="radio" name="gender" value="other"> Answer C  <br>
+      <input type="radio" name="gender" value="other"> Answer D  <br>
+    </form>
+    <br>
+  <% end %>
+  <input type="submit">
+</div>

@@ -32,7 +32,7 @@ User.create(
 
 users = User.all
 
-200.times do
+20.times do
   created_at = Faker::Date.backward(365 * 5)
 
   levels = ["beginner", "intermediate", "advanced"]
