@@ -19,8 +19,9 @@
   <%= @test.points %>
 </p>
 
-<%= link_to 'Edit', edit_test_path(@test) %> |
-<%= link_to 'Back', tests_path %>
+<%= link_to 'Edit Test', edit_test_path(@test) %>
+|
+<%= link_to 'Delete Test', test_path(@test), method: :delete, data: {confirm: "Are you sure?"} %>
 
 <section>
   <h1>Questions</h1>
@@ -44,15 +45,15 @@
   </div>
 
   <div class="field">
-    <%= form.label :a %>
-    <%= form.text_field :a %>
-    <%= form.label :b %>
-    <%= form.text_field :b %>
-    <%= form.label :c %>
-    <%= form.text_field :c %>
-    <%= form.label :d %>
-    <%= form.text_field :d %>
-    <%= form.label :correct %>
+    <%= form.label :a, "(1)" %>
+    <%= form.text_field :a %> <br>
+    <%= form.label :b, "(2)" %>
+    <%= form.text_field :b %> <br>
+    <%= form.label :c, "(3)" %>
+    <%= form.text_field :c %> <br>
+    <%= form.label :d, "(4)" %>
+    <%= form.text_field :d %> <br>
+    <%= form.label :correct, "Solution:" %>
     <%= form.select :correct, [1, 2, 3, 4]%>  </div>
 
   <div class="actions">
@@ -75,6 +76,8 @@
           </small>
           •
           <small>
+            <%= link_to("Edit", edit_test_question_url(@test, question))%>
+            |
             <%=
               link_to(
                 "Delete",
@@ -85,7 +88,6 @@
                 }
               )
             %> 
-            <%= link_to("Edit", edit_test_question_url(@test, question))%>
           </small>
         </p>
       </li>

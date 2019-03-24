@@ -1,5 +1,8 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_question, only: [:edit, :update, :destroy]
+  before_action :authorize_user!, only: [:destroy, :edit, :update]
+
 
   # POST /questions
   def create
@@ -58,9 +61,21 @@ class QuestionsController < ApplicationController
 
   # PATCH/PUT /questions/1
   def update
+    # render json: question_params
+    @question.solution_id = question_params["correct"]
+    @question.description = question_params["description"]
     respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: "Question was successfully updated." }
+      if @question.update(params.require(:question).permit(:description))
+        @answers = @question.answers
+        @answers[0].content = question_params["a"]
+        @answers[0].save
+        @answers[1].content = question_params["b"]
+        @answers[1].save
+        @answers[2].content = question_params["c"]
+        @answers[2].save
+        @answers[3].content = question_params["d"]
+        @answers[3].save
+        format.html { redirect_to @question.test, notice: "Question was successfully updated." }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -79,5 +94,9 @@ class QuestionsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def question_params
     params.require(:question).permit(:description, :a, :b, :c, :d, :correct)
+  end
+
+  def authorize_user!
+    redirect_to root_path, alert: 'access denied' unless can? :crud, @question
   end
 end
