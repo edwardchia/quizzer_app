@@ -1,13 +1,10 @@
+<h1>User#Show</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
 </p>
 
 <p>
@@ -21,14 +18,13 @@
 </p>
 
 <p>
-  <strong>Is admin:</strong>
-  <%= @user.is_admin %>
+  <strong> Role: </strong> 
+  <% if @user.is_teacher %>
+  <%= "Teacher" %>
+  <% else %>
+  <%= Student %>
+  <% end>%>
+
 </p>
 
-<p>
-  <strong>Is teacher:</strong>
-  <%= @user.is_teacher %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit', edit_user_path(@user) %> 
