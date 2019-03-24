@@ -1,6 +1,37 @@
 <h1>Editing Question</h1>
 
-<%= render 'form', question: @question %>
+<%= form_with(model: @question, url: test_question_url(@question.test,@question), local: true) do |form| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+<div class="field">
+    <%= form.label :a, "(1)" %>
+    <%= form.text_field :a, :value => @question.answers[0].content %> <br>
+    <%= form.label :b, "(2)" %>
+    <%= form.text_field :b, :value => @question.answers[1].content %> <br>
+    <%= form.label :c, "(3)" %>
+    <%= form.text_field :c, :value => @question.answers[2].content %> <br>
+    <%= form.label :d, "(4)" %>
+    <%= form.text_field :d, :value => @question.answers[3].content %> <br>
+    <%= form.label :correct, "Solution:" %>
+    <%= form.select :correct, [1, 2, 3, 4], :selected => @question.solution_id %>  </div>
+
+  <div class="actions">
+    <%= form.submit "Edit Question" %>
+  </div>
+<% end %>
+
