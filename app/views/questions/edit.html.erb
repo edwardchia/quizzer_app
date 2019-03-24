@@ -1,6 +1,39 @@
 <h1>Editing Question</h1>
 
-<%= render 'form', question: @question %>
+<%= form_with(model: @question, url: test_questions_path, local: true) do |form| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+      <ul>
+      <% @question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+<div class="field">
+    <%= form.label :a %>
+    <%= form.text_field @question.answers[0].content %>
+    <%= form.label :b %>
+    <%= form.text_field :b %>
+    <%= form.label :c %>
+    <%= form.text_field :c %>
+    <%= form.label :d %>
+    <%= form.text_field :d %>
+    <%= form.label :correct %>
+    <%= form.select :correct, [1, 2, 3, 4]%>  </div>
+
+  
+
+  <div class="actions">
+    <%= form.submit "Edit Question" %>
+  </div>
+<% end %>
+

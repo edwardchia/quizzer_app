@@ -16,18 +16,21 @@
     <%= form.text_area :description %>
   </div>
 
-  <div class="field">
-    <%= form.radio_button(:solution_id, @question.answers[0].id) %>
-    <%= form.label @question.answers[0].content %>
-    <%= form.radio_button(:solution_id, @question.answers[1].id) %>
-    <%= form.label @question.answers[1].content %>
-    <%= form.radio_button(:solution_id, @question.answers[2].id) %>
-    <%= form.label @question.answers[2].content %>
-    <%= form.radio_button(:solution_id, @question.answers[3].id) %>
-    <%= form.label @question.answers[3].content %>
-  </div>
+<div class="field">
+    <%= form.label :a %>
+    <%= form.text_field :a %>
+    <%= form.label :b %>
+    <%= form.text_field :b %>
+    <%= form.label :c %>
+    <%= form.text_field :c %>
+    <%= form.label :d %>
+    <%= form.text_field :d %>
+    <%= form.label :correct %>
+    <%= form.select :correct, [1, 2, 3, 4]%>  </div>
+
+  
 
   <div class="actions">
-    <%= form.submit "Save Question" %>
+    <%= form.submit "Edit Question" %>
   </div>
 <% end %>

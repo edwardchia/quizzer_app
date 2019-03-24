@@ -10,53 +10,50 @@ class QuestionsController < ApplicationController
     @question.solution_id = question_params["correct"]
     @question.description = question_params["description"]
     @question.test = @test
-    @question.save
+    respond_to do |format|
+      if @question.save
+        @question_id = Question.last.id
 
-    @question_id = Question.last.id
+        @answer = Answer.new()
+        @answer.question_id = @question_id
+        @answer.content = question_params["a"]
+        @answer.save
 
-    @answer = Answer.new()
-    @answer.question_id = @question_id
-    @answer.content = question_params["a"]
-    @answer.save
+        @answer = Answer.new()
+        @answer.question_id = @question_id
+        @answer.content = question_params["b"]
+        @answer.save
 
-    @answer = Answer.new()
-    @answer.question_id = @question_id
-    @answer.content = question_params["b"]
-    @answer.save
+        @answer = Answer.new()
+        @answer.question_id = @question_id
+        @answer.content = question_params["c"]
+        @answer.save
 
-    @answer = Answer.new()
-    @answer.question_id = @question_id
-    @answer.content = question_params["c"]
-    @answer.save
-
-    @answer = Answer.new()
-    @answer.question_id = @question_id
-    @answer.content = question_params["d"]
-    @answer.save
-
-    # respond_to do |format|
-    #   if @question.save
-    #     render json: question_params
-    #     # format.html { redirect_to @question, notice: "Question was successfully created." }
-    #     #format.json { render :show, status: :created, location: @question }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @question.errors, status: :unprocessable_entity }
-    #   end
-    # end
+        @answer = Answer.new()
+        @answer.question_id = @question_id
+        @answer.content = question_params["d"]
+        @answer.save
+        format.html { redirect_to test_url(@test), notice: "Question was successfully created." }
+      else
+        @questions = @test.questions.order(created_at: :asc)
+        format.html { render "tests/show" }
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /questions/1
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
+      format.html { redirect_to test_url(@question.test), notice: "Question was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   # GET /questions/1/edit
   def edit
+    # render json: set_question
   end
 
   # PATCH/PUT /questions/1

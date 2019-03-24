@@ -29,7 +29,7 @@ class TestsController < ApplicationController
   # GET /tests/1
   def show
     @question = Question.new
-    @questions = @test.questions.order(created_at: :desc)
+    @questions = @test.questions.order(created_at: :asc)
   end
 
   # DELETE /tests/1

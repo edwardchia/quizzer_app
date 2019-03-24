@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Name:</strong>
@@ -54,10 +53,43 @@
     <%= form.label :d %>
     <%= form.text_field :d %>
     <%= form.label :correct %>
-    <%= form.select :correct, [1, 2,3,4]%>  </div>
+    <%= form.select :correct, [1, 2, 3, 4]%>  </div>
 
   <div class="actions">
     <%= form.submit "Save Question" %>
   </div>
   <% end %>
+
+  <ol class="question-list">
+    <% @questions.each do |question| %>
+      <li>
+        <p>
+          <%= question.description %> <br>
+          (1) <%= question.answers[0].content%> <br>
+          (2) <%= question.answers[1].content%> <br>
+          (3) <%= question.answers[2].content%> <br>
+          (4) <%= question.answers[3].content%> <br>
+          <strong>Solution: (<%= question.solution_id %>)</strong><br>
+          <small>
+            Created <%= time_ago_in_words(question.created_at) %> ago
+          </small>
+          •
+          <small>
+            <%=
+              link_to(
+                "Delete",
+                test_question_path(@test, question),
+                method: :delete,
+                data: {
+                  confirm: "Are you sure?"
+                }
+              )
+            %> 
+            <%= link_to("Edit", edit_test_question_url(@test, question))%>
+          </small>
+        </p>
+      </li>
+    <% end %>
+  </ol>
+
   </section>
