@@ -1,6 +1,8 @@
 class CompletedTestsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  before_action :authenticate_user!
+
   def show
     @test = Test.find(params["id"])
     @questions = Question.where({ test_id: @test.id })
