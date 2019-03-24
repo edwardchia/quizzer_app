@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_question, only: [:edit, :update, :destroy]
-  before_action :authorize_user!, only: [:destroy, :edit, :update]
+  # before_action :authorize_user!, only: [:destroy, :edit, :update]
 
 
   # POST /questions
