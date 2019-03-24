@@ -16,9 +16,6 @@
     <br>
     Correct solution:  <%= Answer.where( "question_id=#{question.id}")[(question.solution_id.to_i) - 1].content %> (<%= question.solution_id %> )
     <br>
-    
-  
-
     <% if @answers[question_count-1].to_i == question.solution_id.to_i  %>
     <strong> You got this question correct! </strong>
     <% correct_tally += 1%>
