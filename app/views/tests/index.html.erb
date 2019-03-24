@@ -22,9 +22,9 @@
         <td><%= test.level %></td>
         <td><%= test.points %></td>
         <td><%= test.user.email %></td>
-        <td><%= link_to 'Show', test %></td>
+        <td><%= link_to 'View', test %></td>
         <td><%= link_to 'Edit', edit_test_path(test) %></td>
-        <td><%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

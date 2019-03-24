@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'welcome/home'
-  resources :questions
-  resources :tests
+  get "welcome/home"
+  resources :tests do
+    resources :questions, only: [:create, :destroy, :edit, :update]
+  end
   resources :users, only: [:new, :show, :create, :edit, :update]
   resource :session, only: [:new, :create, :destroy]
 
