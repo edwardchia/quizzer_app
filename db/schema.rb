@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 2019_03_23_192227) do
 
   create_table "tests", force: :cascade do |t|
     t.string "name"
-    t.string "description"
+    t.text "description"
     t.string "level"
-    t.string "points"
+    t.integer "points"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2019_03_23_192227) do
     t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
-    t.string "is_admin", default: "f"
-    t.string "is_teacher", default: "f"
+    t.boolean "is_admin", default: false
+    t.boolean "is_teacher", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
