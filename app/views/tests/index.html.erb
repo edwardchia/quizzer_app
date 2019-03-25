@@ -1,36 +1,30 @@
-<div class="container">
   <% @tests.each do |test| %>
     <div class="card">
       <div class="card-header">
-       <strong> <h3><%= test.name %> </h3></strong>
+        <strong>
+          <h3><%= test.name %> </h3>
+        </strong>
       </div>
       <div  class="card-body">
-      <p>Description: <%= test.description %></p>
-      <p>Level: <%= test.level %></p>
-      <p>Question points: <%= test.points %></p>
-      <p>Created by: <%= test.user&.full_name || 'DELETED' %></p>
-
-      <p>
-
-          <%= link_to 'Start Quiz', "/start_test/#{test.id}",  class: "btn btn-primary"%> 
-
-      </p>
-
- 
-      <small>
-      <% if can? :create, current_user %>
-      <%= link_to 'View Questions', test %>
-      <% end %>
-      <% if can? :update, test %>
-      <%= link_to 'Edit Test Profile', edit_test_path(test) %>
-      <% end %>
-      <% if can? :destroy, test %>
-      <%= link_to 'Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-      </small>
-
-    </div>
+        <p>Description: <%= test.description %></p>
+        <p>Level: <%= test.level %></p>
+        <p>Question points: <%= test.points %></p>
+        <p>Created by: <%= test.user&.full_name || 'DELETED' %></p>
+        <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-outline-primary"%> <br />
+        <br />
+        <% if can? :create, current_user %>
+          <%= link_to 'View Questions', test %>&nbsp; |
+        <% end %>
+        <% if can? :update, test %>
+          <%= link_to 'Edit Test Profile', edit_test_path(test) %> &nbsp;|
+        <% end %>
+        <% if can? :destroy, test %>
+          <%= link_to 'Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
     </div>
     <br />
   <% end %>
-  <%= link_to 'New Test', new_test_path %>
+</div>
+
+

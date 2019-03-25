@@ -5,7 +5,7 @@ class CompletedTestsController < ApplicationController
 
   def show
     @test = Test.find(params["id"])
-    @questions = Question.where({ test_id: @test.id })
+    @questions = Question.where({ test_id: @test.id }).order(created_at: :asc)
   end
 
   def result
@@ -19,6 +19,6 @@ class CompletedTestsController < ApplicationController
     end
 
     @test = Test.find(params["id"])
-    @questions = Question.where({ test_id: @test.id })
+    @questions = Question.where({ test_id: @test.id }).order(created_at: :asc)
   end
 end

@@ -1,23 +1,28 @@
-<div class="card-body">
-  <h1>Quiz Name: <%= @test.name %></h1>
+
+  <h1> <%= @test.name %></h1>
+
+<p> Each question in this quiz is a multiple-choice question with four answer choices. Read each question and answer choice carefully and choose the ONE best answer. </p>
 
 
-    <% question_count = 1%>
-    
     <form>
+      <% question_count = 1%>
+      <% @questions.each do |question | %>
+          <div class="card">
+          <div class="card-header"> <strong> Q<%= question_count%>: <%= question.description%> </strong> </div>
+          <div class="card-body">
+              <input type="radio" name="Question <%= question_count %>" value="1" > <%= question.answers[0].content %><br>
+              <input type="radio" name="Question <%= question_count %>"  value="2">  <%= question.answers[1].content %><br>
+              <input type="radio" name="Question <%= question_count %>"  value="3">  <%= question.answers[2].content %><br>
+              <input type="radio" name="Question <%= question_count %>"  value="4">  <%= question.answers[3].content %><br>
+            </div>
+          </div>
+          <br />
+      <% question_count += 1 %>
 
-  <% @questions.each do |question | %>
-    <div><strong> Question: <%= question.description%> </strong></div>
+      <% end %>
 
-      <input type="radio" name="Question <%= question_count %>" value="1" > <%= question.answers[0].content %><br>
-      <input type="radio" name="Question <%= question_count %>"  value="2">  <%= question.answers[1].content %><br>
-      <input type="radio" name="Question <%= question_count %>"  value="3">  <%= question.answers[2].content %><br>
-      <input type="radio" name="Question <%= question_count %>"  value="4">  <%= question.answers[3].content %><br>
-    <br>
-    <% question_count += 1 %>
-  <% end %>
-  <input type="submit" formmethod="post">
-
-      </form>
-
-</div>
+      <p style="text-align: center">
+      <input type="submit" formmethod="post" class="btn btn-outline-primary" >
+      </p>
+    </form>
+  </div>

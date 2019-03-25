@@ -19,10 +19,6 @@
 
 
 
- a {
-     color: white;
-     padding-left: 15px;
- }
 
  .correct{
 
@@ -34,3 +30,10 @@
     color:red
  }
 
+ body {
+
+   background-color: #cccccc;
+  }
+
+  .navbar-nav a:hover  { color: #fff !important; }
+  .navbar-nav a  { color: #fff !important; }

@@ -25,8 +25,8 @@
         <%= link_to("Tests", tests_path) %>
    <% if user_signed_in? %>
           <% if current_user.is_teacher == true %>
-          <li class="nav-item active">
-            <%= link_to("New Test", new_test_path) %>
+          <li class="nav-item active" ">
+            <%= link_to("New Test", new_test_path)  %> 
           </li>
           <% end %>
           <span>Hello <%= current_user.full_name %></span>
