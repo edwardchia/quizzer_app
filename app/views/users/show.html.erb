@@ -31,13 +31,5 @@
 
 <%= link_to 'Edit Account Details', edit_user_path(@user), :class=>"btn btn-primary" %> 
 
-<br />
-<br />
-<p>Test History</p>
-
-<% @tests = CompletedTest.where({user_id: current_user.id}) %>
- <% @tests.each do |test| %>
- <p><strong> <%=Test.find(test.id).name%></strong><br /> Score: <%=test.score%> %<br /> Date Taken: <%=test.created_at %></p>
- <% end %>
 </div>
 </div>

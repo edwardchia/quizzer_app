@@ -1,39 +1,52 @@
 <div class="container">
-<div class="row">
-  
-  <% @tests.each do |test| %>
-   <div class="col-6 ">
-    <div class="card">
-      <div class="card-header">
-        <strong>
-          <h1><%= test.name %> </h1>
-        </strong>
-      </div>
-      <div  class="card-body">
-        <p>
-        <strong> Description: </strong> <%= test.description %> <br />
-        <strong> Level:</strong> <%= test.level %> <br />
-        <strong>Created by:</strong> <%= test.user&.full_name || 'DELETED' %></p>
-        <div style="text-align: right">
-              <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%> 
+  <div class="row">
+    <% @tests.each do |test| %>
+      <div class="col-6 ">
+        <div class="card">
+          <div class="card-header">
+            <strong>
+              <h1><%= test.name %> </h1>
+            </strong>
+          </div>
+          <% if current_user && CompletedTest.where({user_id: current_user.id, test_id: test.id})[0] != nil %>
+            <div  class="card-body" style="background-color: grey">
+            <% else%>
+              <div  class="card-body">
+              <% end%>
+              <p>
+                <strong> Description: </strong> <%= test.description %> <br />
+                <strong> Level:</strong> <%= test.level %> <br />
+                <strong>Created by:</strong> <%= test.user&.full_name || 'DELETED' %> <br />
+                <% if current_user && CompletedTest.where({user_id: current_user.id, test_id: test.id})[0] != nil %>
+                  <strong> Last test score:</strong> <%= CompletedTest.where({user_id: current_user.id, test_id: test.id})[0].score %> % <br />
+                  <strong> Last test date: </strong> <%= CompletedTest.where({user_id: current_user.id, test_id: test.id})[0].created_at %>                
+                  <% else %>
+                  <br />
+                  <br />
+                  <br />
+                  <% end%>
+              </p>
+              <div style="text-align: right">
+              <% if current_user && CompletedTest.where({user_id: current_user.id, test_id: test.id})[0] != nil %>
+<%= link_to 'Try again!', "/start_test/#{test.id}",  class: "btn btn-primary"%>
+              <% else %>
+                <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%>
+                <% end %>
               </div>
-      </div>
-
-        <% if can? :create, current_user %>
-      <div class="card-footer">
-
-          <%= link_to 'View Questions', test %>&nbsp; 
-        <% end %>
-        <% if can? :update, test %>
-          <%= link_to '| Edit Test Profile', edit_test_path(test) %> &nbsp;
-        <% end %>
-        <% if can? :destroy, test %>
-          <%= link_to '| Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+            <% if can? :create, current_user %>
+              <div class="card-footer">
+                <%= link_to 'View Questions', test %>&nbsp; 
+              <% end %>
+              <% if can? :update, test %>
+                <%= link_to '| Edit Test Profile', edit_test_path(test) %> &nbsp;
+              <% end %>
+              <% if can? :destroy, test %>
+                <%= link_to '| Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <% end %>
+      <% end %>
     </div>
-    </div>
-  <% end %>
-
-</div>
-</div>
+  </div>
