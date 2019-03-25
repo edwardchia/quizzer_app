@@ -1,4 +1,8 @@
+<div class="container">
+<div class="row">
+  
   <% @tests.each do |test| %>
+   <div class="col-6 ">
     <div class="card">
       <div class="card-header">
         <strong>
@@ -25,10 +29,9 @@
           <%= link_to '| Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
         <% end %>
-
     </div>
-    <br />
+    </div>
   <% end %>
+
 </div>
-
-
+</div>
