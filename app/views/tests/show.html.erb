@@ -18,7 +18,7 @@
 </div>
 
 <section class="container-fluid">
-  
+  <% if @questions.length > 0%>
   <h2>Questions</h2>
   <% counter = 1%>
     <% @questions.each do |question| %>
@@ -63,7 +63,7 @@
 
       <% counter += 1%>
     <% end %>
-
+    <% end %>
 
   <h2>Add New Question</h2>
 

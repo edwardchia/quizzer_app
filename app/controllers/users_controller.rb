@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:show, :edit, :update]
 
   def show
   end
@@ -45,5 +46,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :first_name, :last_name, :is_admin, :is_teacher)
+  end
+
+  def authorize_user!
+    redirect_to root_path, alert: 'access denied' unless @user==current_user || current_user.is_admin==true
   end
 end
