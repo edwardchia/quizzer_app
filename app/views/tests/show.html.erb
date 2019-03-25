@@ -10,8 +10,8 @@
     
     <div class= "mb-3 mt-2">  
       <% if can? :crud, @test %>
-        <%= link_to 'Edit Test Profile', edit_test_path(@test), class: "btn btn-outline-primary" %>
-        <%= link_to 'Delete Test', test_path(@test), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-primary" %>
+        <%= link_to 'Edit Test Profile', edit_test_path(@test), class: "btn btn-primary" %>
+        <%= link_to 'Delete Test', test_path(@test), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-primary" %>
       <% end %>  
     </div>
   </div>
@@ -45,7 +45,7 @@
           </div>
           <div class="card-footer">
           <small>
-            <%= link_to("Edit", edit_test_question_url(@test, question), :class=>"btn btn-outline-primary")%>
+            <%= link_to("Edit", edit_test_question_url(@test, question), :class=>"btn btn-primary")%>
             <%=
               link_to(
                 "Delete",
@@ -53,7 +53,7 @@
                 method: :delete,
                 data: {
                   confirm: "Are you sure?"
-                }, :class=>"btn btn-outline-primary"
+                }, :class=>"btn btn-primary"
               )
             %> 
           </small>
@@ -98,7 +98,7 @@
     <%= form.label :correct, "Correct Answer:" %>
     <%= form.select :correct, [1, 2, 3, 4]%>  </div>
 
-    <%= form.submit "Save Question", :class => "btn btn-outline-primary mb-3" %>
+    <%= form.submit "Save Question", :class => "btn btn-primary mb-3" %>
   <% end %>
 
   </section>

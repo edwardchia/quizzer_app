@@ -1,8 +1,9 @@
 
+  <div class="jumbotron">
   <h1> <%= @test.name %></h1>
 
-<p> Each question in this quiz is a multiple-choice question with four answer choices. Read each question and answer choice carefully and choose the ONE best answer. </p>
-
+<p> Read each question and answer choice carefully and choose the ONE best answer. </p>
+  </div>
 
     <form>
       <% question_count = 1%>
@@ -21,8 +22,8 @@
 
       <% end %>
 
-      <p style="text-align: center">
-      <input type="submit" formmethod="post" class="btn btn-outline-primary" >
+      <p style="text-align: left">
+      <input type="submit" value="Submit Test" formmethod="post" class="btn btn-primary" >
       </p>
     </form>
   </div>
