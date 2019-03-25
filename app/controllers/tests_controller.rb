@@ -15,7 +15,7 @@ class TestsController < ApplicationController
     @test.user = current_user
     respond_to do |format|
       if @test.save
-        format.html { redirect_to @test, notice: "Test was successfully created." }
+        format.html { redirect_to @test, notice: "Test was successfully created" }
         format.json { render :show, status: :created, location: @test }
       else
         format.html { render :new }
@@ -39,7 +39,7 @@ class TestsController < ApplicationController
   def destroy
     @test.destroy
     respond_to do |format|
-      format.html { redirect_to tests_url, notice: "Test was successfully destroyed." }
+      format.html { redirect_to tests_url, notice: "Test was successfully destroyed" }
       format.json { head :no_content }
     end
   end
@@ -52,7 +52,7 @@ class TestsController < ApplicationController
   def update
     respond_to do |format|
       if @test.update(test_params)
-        format.html { redirect_to @test, notice: "Test was successfully updated." }
+        format.html { redirect_to @test, notice: "Test was successfully updated" }
         format.json { render :show, status: :ok, location: @test }
       else
         format.html { render :edit }
@@ -74,11 +74,11 @@ class TestsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to tests_path, alert: 'access denied' unless can? :crud, @test
+    redirect_to tests_path, alert: 'Access Denied' unless can? :crud, @test
   end
 
   def authorize_teacher!
-    redirect_to tests_path, alert: 'access denied' unless can? :create, current_user
+    redirect_to tests_path, alert: 'Access Denied' unless can? :create, current_user
   end
 
 end
