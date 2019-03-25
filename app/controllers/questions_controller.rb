@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
     # render json: question_params
     @test = Test.find params[:test_id]
     if !(can? :crud, @test)
-      redirect_to test_path(@test), alert: 'access denied' and return
+      redirect_to test_path(@test), alert: 'Access Denied' and return
     end
 
     @question = Question.new()
@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
         @answer.question_id = @question_id
         @answer.content = question_params["d"]
         @answer.save
-        format.html { redirect_to test_url(@test), notice: "Question was successfully created." }
+        format.html { redirect_to test_url(@test), notice: "Question was successfully created" }
       else
         @questions = @test.questions.order(created_at: :asc)
         format.html { render "tests/show" }
@@ -51,7 +51,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to test_url(@question.test), notice: "Question was successfully destroyed." }
+      format.html { redirect_to test_url(@question.test), notice: "Question was successfully destroyed" }
       format.json { head :no_content }
     end
   end
@@ -77,7 +77,7 @@ class QuestionsController < ApplicationController
         @answers[2].save
         @answers[3].content = question_params["d"]
         @answers[3].save
-        format.html { redirect_to @question.test, notice: "Question was successfully updated." }
+        format.html { redirect_to @question.test, notice: "Question was successfully updated" }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -99,7 +99,7 @@ class QuestionsController < ApplicationController
   end
 
   def authorize_user!
-    redirect_to test_path(@question.test), alert: 'access denied' unless can? :change, @question
+    redirect_to test_path(@question.test), alert: 'Access Denied' unless can? :change, @question
   end
 
 end
