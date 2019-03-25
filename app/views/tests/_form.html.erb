@@ -1,41 +1,42 @@
 <%= form_with(model: test, local: true) do |form| %>
-  <% if test.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+  <form>
+    <% if test.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(test.errors.count, "error") %> prohibited this test from being saved:</h2>
+        <ul>
+          <% test.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% test.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="form-group">
+      <%= form.label :name %>
+      <%= form.text_field :name, class: "form-control", placeholder: "Enter Name" %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <div class="form-group">
+      <%= form.label :description %>
+      <%= form.text_field :description, class: "form-control", placeholder: "Enter Description" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :beginner %>
+      <%= form.radio_button :level, "Beginner"%>
+      <%= form.label :intermediate %>
+      <%= form.radio_button :level, "Intermediate" %>
+      <%= form.label :advanced %>
+      <%= form.radio_button :level, "Advanced" %>
+    </div>
+    
+    <div class="form-group">
+      <%= form.label :points %>
+      <%= form.text_field :points, class: "form-control", placeholder: "Enter Points" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :beginner %>
-    <%= form.radio_button :level, "Beginner"%>
-    <%= form.label :intermediate %>
-    <%= form.radio_button :level, "Intermediate" %>
-    <%= form.label :advanced %>
-    <%= form.radio_button :level, "Advanced" %>
-  </div>
-
-  <div class="field">
-    <%= form.label :points %>
-    <%= form.text_field :points %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Save"%>
-  </div>
+    <div class="actions">
+      <%= form.submit "Save", class: "btn btn-primary"%>
+    </div>
+  </form>
 <% end %>

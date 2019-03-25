@@ -1,34 +1,71 @@
+<div class="container-fluid mb-4">
+  <div class="card border border-secondary p-3">
+    <h2 class="card-title"><strong>Test:</strong><%= @test.name %></h2>
+    <p class="card-text">
+      <%= @test.description %>
+      <p><strong>Level:</strong><%= @test.level %></p>
+      <p><strong>Points:</strong><%= @test.points %></p>
+      <small>Created by: <%= @test.user&.full_name || 'DELETED' %></small>
+    </p>
+    
+    <div class= "mb-3 mt-2">  
+      <% if can? :crud, @test %>
+        <%= link_to 'Edit Test Profile', edit_test_path(@test), class: "btn btn-outline-primary" %>
+        <%= link_to 'Delete Test', test_path(@test), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-outline-primary" %>
+      <% end %>  
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @test.name %>
-</p>
+<section class="container-fluid">
+  
+  <h2>Questions</h2>
+  <% counter = 1%>
+    <% @questions.each do |question| %>
+        <div class="card mb-4">
+          <div class="card-header">
+          <strong>
+          Q<%= counter %>.
+            <%= question.description %> 
+            </strong>
+          </div>
+          <div class="card-body">
+          <p>
+          (1) <%= question.answers[3].content%> <br>
+          (2) <%= question.answers[2].content%> <br>
+          (3) <%= question.answers[1].content%> <br>
+          (4) <%= question.answers[0].content%> <br>
+          </p>
+        
+          <strong>Solution: (<%= question.solution_id %>)</strong><br>
+          <small>
+            Created <%= time_ago_in_words(question.created_at) %> ago
+          </small>
 
-<p>
-  <strong>Description:</strong>
-  <%= @test.description %>
-</p>
+          </div>
+          <div class="card-footer">
+          <small>
+            <%= link_to("Edit", edit_test_question_url(@test, question), :class=>"btn btn-outline-primary")%>
+            <%=
+              link_to(
+                "Delete",
+                test_question_path(@test, question),
+                method: :delete,
+                data: {
+                  confirm: "Are you sure?"
+                }, :class=>"btn btn-outline-primary"
+              )
+            %> 
+          </small>
+          </div>
+        </div>
 
-<p>
-  <strong>Level:</strong>
-  <%= @test.level %>
-</p>
 
-<p>
-  <strong>Points:</strong>
-  <%= @test.points %>
-</p>
-<p>Created by: <%= @test.user&.full_name || 'DELETED' %></p>
+      <% counter += 1%>
+    <% end %>
 
 
-<% if can? :crud, @test %>
-<%= link_to 'Edit Test Profile', edit_test_path(@test) %>
-|
-<%= link_to 'Delete Test', test_path(@test), method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
-
-<section>
-  <h1>Questions</h1>
+  <h2>Add New Question</h2>
 
   <%= form_with(model: [@test, @question], local: true) do |form| %>
     <% if @question.errors.any? %>
@@ -43,12 +80,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, "Question:" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div class="field">
+  Answer:
+  <div class="form-group">
     <%= form.label :a, "(1)" %>
     <%= form.text_field :a %> <br>
     <%= form.label :b, "(2)" %>
@@ -57,45 +95,10 @@
     <%= form.text_field :c %> <br>
     <%= form.label :d, "(4)" %>
     <%= form.text_field :d %> <br>
-    <%= form.label :correct, "Solution:" %>
+    <%= form.label :correct, "Correct Answer:" %>
     <%= form.select :correct, [1, 2, 3, 4]%>  </div>
 
-  <div class="actions">
-    <%= form.submit "Save Question" %>
-  </div>
+    <%= form.submit "Save Question", :class => "btn btn-outline-primary mb-3" %>
   <% end %>
-
-  <ol class="question-list">
-    <% @questions.each do |question| %>
-      <li>
-        <p>
-          <%= question.description %> <br>
-          (1) <%= question.answers[0].content%> <br>
-          (2) <%= question.answers[1].content%> <br>
-          (3) <%= question.answers[2].content%> <br>
-          (4) <%= question.answers[3].content%> <br>
-          <strong>Solution: (<%= question.solution_id %>)</strong><br>
-          <small>
-            Created <%= time_ago_in_words(question.created_at) %> ago
-          </small>
-          •
-          <small>
-            <%= link_to("Edit", edit_test_question_url(@test, question))%>
-            |
-            <%=
-              link_to(
-                "Delete",
-                test_question_path(@test, question),
-                method: :delete,
-                data: {
-                  confirm: "Are you sure?"
-                }
-              )
-            %> 
-          </small>
-        </p>
-      </li>
-    <% end %>
-  </ol>
 
   </section>

@@ -17,9 +17,6 @@
  *= require_self
  */
 
-
-
-
  .correct{
 
     color: green
@@ -30,10 +27,14 @@
     color:red
  }
 
+ .container{
+     padding-top: 20px;
+ }
+
  body {
 
-   background-color: #cccccc;
-  }
+    background-color: #cccccc;
+   }
 
-  .navbar-nav a:hover  { color: #fff !important; }
-  .navbar-nav a  { color: #fff !important; }
+.navbar-nav a:hover  { color: #fff !important; }
+.navbar-nav a  { color: #fff !important; }
