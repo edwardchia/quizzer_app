@@ -21,7 +21,12 @@ class QuestionsController < ApplicationController
 
         @answer = Answer.new()
         @answer.question_id = @question_id
-        @answer.content = question_params["a"]
+        @answer.content = question_params["d"]
+        @answer.save
+        
+        @answer = Answer.new()
+        @answer.question_id = @question_id
+        @answer.content = question_params["c"]
         @answer.save
 
         @answer = Answer.new()
@@ -31,13 +36,9 @@ class QuestionsController < ApplicationController
 
         @answer = Answer.new()
         @answer.question_id = @question_id
-        @answer.content = question_params["c"]
+        @answer.content = question_params["a"]
         @answer.save
 
-        @answer = Answer.new()
-        @answer.question_id = @question_id
-        @answer.content = question_params["d"]
-        @answer.save
         format.html { redirect_to test_url(@test), notice: "Question was successfully created" }
       else
         @questions = @test.questions.order(created_at: :asc)
