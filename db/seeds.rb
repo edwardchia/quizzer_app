@@ -29,28 +29,32 @@ User.create(
 )
 users = User.all
 20.times do
- created_at = Faker::Date.backward(365 * 5)  
- levels = ["beginner", "intermediate", "advanced"]
- points = Array(1..10)
- p = Test.create(
-   name: Faker::Lorem.sentence(3),
-   description: Faker::Lorem.paragraph,
-   level: levels.sample,
-   points: points.sample,
-   created_at: created_at,
-   updated_at: created_at,
-   user: users.sample,
- )  
- # load up 5 questions
- 5.times do
-   question = Faker::Quote.yoda    
-   q = Question.create(description: question, test_id: Test.last.id, solution_id: 1)    
-   # load up 4 answers
-   4.times do
-     Answer.create(content: "This", question_id: Question.last.id)
-     Answer.create(content: "That", question_id: Question.last.id)
-     Answer.create(content: "All of the above", question_id: Question.last.id)
-     Answer.create(content: "None", question_id: Question.last.id)
-   end
- end
+  created_at = Faker::Date.backward(365 * 5)
+
+  levels = ["beginner", "intermediate", "advanced"]
+  points = Array(1..10)
+  p = Test.create(
+    name: Faker::Lorem.sentence(3),
+    description: Faker::Lorem.paragraph,
+    level: levels.sample,
+    points: points.sample,
+    created_at: created_at,
+    updated_at: created_at,
+    user: users.sample,
+  )
+
+  # load up 5 questions
+  5.times do
+    question = Faker::Quote.yoda
+
+    q = Question.create(description: question, test_id: Test.last.id, solution_id: rand(1...4))
+
+    # load up 4 answers
+    4.times do
+      Answer.create(content: "This", question_id: Question.last.id)
+      Answer.create(content: "That", question_id: Question.last.id)
+      Answer.create(content: "All of the above", question_id: Question.last.id)
+      Answer.create(content: "None", question_id: Question.last.id)
+    end
+  end
 end
