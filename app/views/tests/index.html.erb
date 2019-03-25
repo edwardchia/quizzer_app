@@ -14,7 +14,9 @@
         <strong> Description: </strong> <%= test.description %> <br />
         <strong> Level:</strong> <%= test.level %> <br />
         <strong>Created by:</strong> <%= test.user&.full_name || 'DELETED' %></p>
+        <div style="text-align: right">
               <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%> 
+              </div>
       </div>
 
         <% if can? :create, current_user %>
