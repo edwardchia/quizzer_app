@@ -6,20 +6,23 @@
         </strong>
       </div>
       <div  class="card-body">
-        <p>Description: <%= test.description %></p>
-        <p>Level: <%= test.level %></p>
-        <p>Created by: <%= test.user&.full_name || 'DELETED' %></p>
+        <p>
+        <strong> Description: </strong> <%= test.description %> <br />
+        <strong> Level:</strong> <%= test.level %> <br />
+        <strong>Created by:</strong> <%= test.user&.full_name || 'DELETED' %></p>
+        <div style="text-align:right">
         <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%> <br />
+        </div>
       </div>
       <div class="card-footer">
         <% if can? :create, current_user %>
           <%= link_to 'View Questions', test %>&nbsp; 
         <% end %>
         <% if can? :update, test %>
-          <%= link_to 'Edit Test Profile', edit_test_path(test) %> &nbsp;
+          <%= link_to '| Edit Test Profile', edit_test_path(test) %> &nbsp;
         <% end %>
         <% if can? :destroy, test %>
-          <%= link_to 'Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to '| Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
       </div>
     </div>
