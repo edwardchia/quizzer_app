@@ -2,21 +2,21 @@
     <div class="card">
       <div class="card-header">
         <strong>
-          <h3><%= test.name %> </h3>
+          <h1><%= test.name %> </h1>
         </strong>
       </div>
       <div  class="card-body">
         <p>Description: <%= test.description %></p>
         <p>Level: <%= test.level %></p>
-        <p>Question points: <%= test.points %></p>
         <p>Created by: <%= test.user&.full_name || 'DELETED' %></p>
-        <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-outline-primary"%> <br />
-        <br />
+        <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%> <br />
+      </div>
+      <div class="card-footer">
         <% if can? :create, current_user %>
-          <%= link_to 'View Questions', test %>&nbsp; |
+          <%= link_to 'View Questions', test %>&nbsp; 
         <% end %>
         <% if can? :update, test %>
-          <%= link_to 'Edit Test Profile', edit_test_path(test) %> &nbsp;|
+          <%= link_to 'Edit Test Profile', edit_test_path(test) %> &nbsp;
         <% end %>
         <% if can? :destroy, test %>
           <%= link_to 'Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
