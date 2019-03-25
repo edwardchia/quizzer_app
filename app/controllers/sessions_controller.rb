@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       puts ("**********logged in*************")
       session[:user_id] = user.id
       flash[:notice] = "Logged In"
-      redirect_to "/"
+      redirect_to "/tests"
     else
       flash[:alert] = "Wrong email or password"
       puts ("**********not logged in*************")
