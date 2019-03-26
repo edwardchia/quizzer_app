@@ -43,8 +43,9 @@
               <% end %>
               <% if can? :destroy, test %>
                 <%= link_to '| Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
-              </div>
+              
             <% end %>
+            </div>
           </div>
         </div>
       <% end %>
