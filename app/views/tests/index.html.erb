@@ -19,23 +19,23 @@
                 <strong>Created by:</strong> <%= test.user&.full_name || 'DELETED' %> <br />
                 <% if current_user && CompletedTest.where({user_id: current_user.id, test_id: test.id})[0] != nil %>
                   <strong> Last test score:</strong> <%= CompletedTest.where({user_id: current_user.id, test_id: test.id})[0].score %> % <br />
-                  <strong> Last test date: </strong> <%= CompletedTest.where({user_id: current_user.id, test_id: test.id})[0].created_at %>                
-                  <% else %>
+                  <strong> Last test date: </strong> <%= CompletedTest.where({user_id: current_user.id, test_id: test.id})[0].created_at %>
+                <% else %>
                   <br />
                   <br />
                   <br />
-                  <% end%>
+                <% end%>
               </p>
               <div style="text-align: right">
-              <% if current_user && CompletedTest.where({user_id: current_user.id, test_id: test.id})[0] != nil %>
-<%= link_to 'Try again!', "/start_test/#{test.id}",  class: "btn btn-primary"%>
-              <% else %>
-                <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%>
+                <% if current_user && CompletedTest.where({user_id: current_user.id, test_id: test.id})[0] != nil %>
+                  <%= link_to 'Try again!', "/start_test/#{test.id}",  class: "btn btn-primary"%>
+                <% else %>
+                  <%= link_to 'Start Test!', "/start_test/#{test.id}",  class: "btn btn-primary"%>
                 <% end %>
               </div>
             </div>
-            <% if can? :create, current_user %>
-              <div class="card-footer">
+            <div class="card-footer">
+              <% if can? :create, current_user %>
                 <%= link_to 'View Questions', test %>&nbsp; 
               <% end %>
               <% if can? :update, test %>
@@ -43,8 +43,7 @@
               <% end %>
               <% if can? :destroy, test %>
                 <%= link_to '| Delete Test', test, method: :delete, data: { confirm: 'Are you sure?' } %>
-              
-            <% end %>
+              <% end %>
             </div>
           </div>
         </div>
